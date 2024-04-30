@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Pokedex</title>
 </head>
 
@@ -41,7 +42,9 @@
     </div>
 </header>
 <div class="mt-4 mb-4 container text-center">
-
+    <?php
+    include_once 'search.php';
+    ?>
     <h1 class="h3 mb-3 fw-normal">Esto es el body!</h1>
     <br />
     <br />
