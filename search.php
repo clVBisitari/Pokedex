@@ -17,7 +17,15 @@
         $pokemon = $_POST["search_value"];
 
         if (!empty($pokemon) || $pokemon == "") {
-            $sql = "SELECT * FROM pokemon WHERE `name` LIKE '%" . $pokemon . "%'";
+            $sql =
+        "SELECT pokemon.*,  
+       tipo1.name AS type1_name, tipo1.image AS type1_image, tipo2.name AS type2_name, tipo2.image AS type2_image
+        FROM pokemon
+        INNER JOIN type as tipo1
+        ON pokemon.idType1 = tipo1.id
+        LEFT JOIN type as tipo2 ON pokemon.idType2 = tipo2.id
+        WHERE pokemon.name LIKE '%" . $pokemon . "%'";
+
             $result = $connection->query($sql);
 
             if ($result->num_rows > 0) {
@@ -28,8 +36,15 @@
                     echo "<div class='col-md-4 col-sm-6 mb-4'>";
                     echo "<div class='w3-card-4 w3-center w3-blue w3-round-xxlarge'>";
                     echo "<img src='" . $row['image'] . "' style='width:90%' class='w3-image w3-round-xlarge w3-margin-top'>";
-                    echo "<h2 class='w3-wide'> #" .$row['number'] . "</h2>";
+                    echo "<h2 class='w3-wide'>#" . $row['number'] . "</h2>";
                     echo "<h3>" . $row['name'] . "</h3>";
+
+                    echo "<img src='" . $row['type1_image'] . "' alt='" . $row['type1_name'] . "' style='width:30px; height:30px;' class='w3-round w3-margin-right'>";
+
+                    if ($row['type2_image']) {
+                        echo "<img src='" . $row['type2_image'] . "' alt='" . $row['type2_name'] . "' style='width:30px; height:30px;' class='w3-round'>";
+                    }
+
                     echo '<a href="detail.php?id=' . $row['id'] . '" class="btn btn-sm btn-primary m-1 mb-3">Detalles</a>';
 
                     if (isset($userLogin) && $userLogin) {
@@ -52,7 +67,13 @@
 
         }
     } else {
-        $query = "SELECT * FROM pokemon";
+        $query = "SELECT pokemon.*,  
+        tipo1.name AS type1_name, tipo1.image AS type1_image, tipo2.name AS type2_name, tipo2.image AS type2_image
+        FROM pokemon
+        INNER JOIN type as tipo1
+        ON pokemon.idType1 = tipo1.id
+        LEFT JOIN type as tipo2 ON pokemon.idType2 = tipo2.id";
+
         $result = mysqli_query($connection, $query);
 
         if ($result) {
@@ -65,6 +86,11 @@
                 echo "<img src='" . $row['image'] . "' style='width:90%' class='w3-image w3-round-xlarge w3-margin-top'>";
                 echo "<h2 class='w3-wide'># " . $row['number'] . "</h2>";
                 echo "<h3>" . $row['name'] . "</h3>";
+                echo "<img src='" . $row['type1_image'] . "' alt='" . $row['type1_name'] . "' style='width:30px; height:30px;' class='w3-round w3-margin-right'>";
+
+                if ($row['type2_image']) {
+                    echo "<img src='" . $row['type2_image'] . "' alt='" . $row['type2_name'] . "' style='width:30px; height:30px;' class='w3-round'>";
+                }
                 echo '<a href="detail.php?id=' . $row['id'] . '" class="btn btn-sm btn-primary m-1 mb-3">Detalles</a>';
 
                 if (isset($userLogin) && $userLogin) {

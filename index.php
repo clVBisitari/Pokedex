@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+<?php
+session_start();
+include ("DB.php");
+$estaLogueado=isset($_SESSION["username"]);
+
+if (isset($_POST["submit"])) {
+    $username = $_POST["user"];
+    $password = $_POST["pass"];
+
+    $query = "SELECT * FROM user WHERE username = '" . $username . "'";
+    $result = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+
+        if ($password === $user["password"]) {
+            $_SESSION["username"] = $user["username"];
+            $estaLogueado = true;
+        } else {
+            echo "Contraseña incorrecta.";
+        }
+    } else {
+        echo "Usuario no encontrado.";
+    }
+}
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +47,10 @@
         </div>
         <div class=" bg-primary bg-gradient text white col text-right">
 
+            <?php
+            if(!$estaLogueado){
+
+            ?>
             <div class="d-flex flex-row">
                 <form class="d-flex flex-row" name="sesion" method="post" action="http://localhost:80/pokedex/index.php">
                     <div class="p-2 mt-4">
@@ -36,6 +66,20 @@
                         </svg>
                         Iniciar sesión</button>
                 </form>
+                <?php
+                }else{
+
+                ?>
+                <p>Bienvenido, <?php echo $_SESSION["username"]; ?> </p>
+                    <form method="post" action="logout.php"> <!-- Formulario para cerrar sesión -->
+                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button> <!-- Botón de cierre -->
+                    </form>
+                <?php
+            }
+            ?>
+                <?php
+
+                ?>
             </div>
 
         </div>
