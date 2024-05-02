@@ -71,8 +71,8 @@ if (isset($_POST["submit"])) {
 
                 ?>
                 <p>Bienvenido, <?php echo $_SESSION["username"]; ?> </p>
-                    <form method="post" action="logout.php"> <!-- Formulario para cerrar sesión -->
-                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button> <!-- Botón de cierre -->
+                    <form method="post" action="logout.php">
+                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
                     </form>
                 <?php
             }

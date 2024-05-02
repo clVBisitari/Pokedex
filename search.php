@@ -4,14 +4,20 @@
             <div class="w3-col-md-9 search-input">
                 <input type="text" name="search_value" id="search_value" placeholder="" class="w3-input">
             </div>
+            <?php $username = $_SESSION["username"] ?? null; ?>
             <div class="w3-col-md-3">
                 <input type="submit" name="search_button" value="Buscar" class="btn btn-sm btn-primary">
             </div>
         </form>
+        <?php if ($username == "admin"){
+            echo "<a class='btn btn-success m-1 mb-2'>Agregar Pokemon</a>";
+        } ?>
     </div>
 
     <?php
     include("DB.php");
+    $username = $_SESSION["username"] ?? null;
+
 
     if (isset($_POST["search_button"])) {
         $pokemon = $_POST["search_value"];
@@ -46,6 +52,11 @@
                     }
 
                     echo '<a href="detail.php?id=' . $row['id'] . '" class="btn btn-sm btn-primary m-1 mb-3">Detalles</a>';
+
+                    if ($username == "admin") {
+                        echo '<a href="edit.php?id=' . $row['id'] . '" class="btn btn-primary m-1 mb-2">Editar Pokemon</a>';
+                        echo '<a href="delete.php?id=' . $row['id'] . '" class="btn btn-danger m-1 mb-2">Eliminar Pokemon</a>';
+                    }
 
                     if (isset($userLogin) && $userLogin) {
                         echo '<div class="options">';
@@ -86,6 +97,8 @@
                 echo "<img src='" . $row['image'] . "' style='width:90%' class='w3-image w3-round-xlarge w3-margin-top'>";
                 echo "<h2 class='w3-wide'># " . $row['number'] . "</h2>";
                 echo "<h3>" . $row['name'] . "</h3>";
+
+
                 echo "<img src='" . $row['type1_image'] . "' alt='" . $row['type1_name'] . "' style='width:30px; height:30px;' class='w3-round w3-margin-right'>";
 
                 if ($row['type2_image']) {
@@ -93,12 +106,12 @@
                 }
                 echo '<a href="detail.php?id=' . $row['id'] . '" class="btn btn-sm btn-primary m-1 mb-3">Detalles</a>';
 
-                if (isset($userLogin) && $userLogin) {
-                    echo '<div class="options">';
-                    echo '<a href="edit.php?id=' . $row['id'] . '" class="btn btn-sm btn-success m-1 mb-2">Editar</a>';
-                    echo '<a href="delete.php?id=' . $row['id'] . '" class="btn btn-sm btn-danger m-1 mb-2">Eliminar</a>';
-                    echo '</div>';
+                if ($username == "admin") {
+                    echo '<a href="edit.php?id=' . $row['id'] . '" class="btn btn-primary m-1 mb-2">Editar Pokemon</a>';
+                    echo '<a href="delete.php?id=' . $row['id'] . '" class="btn btn-danger m-1 mb-2">Eliminar Pokemon</a>';
                 }
+
+
 
                 echo "</div>";
                 echo "</div>";
