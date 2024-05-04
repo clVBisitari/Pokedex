@@ -52,7 +52,7 @@ if (isset($_POST["submit"])) {
 
             ?>
             <div class="d-flex flex-row">
-                <form class="d-flex flex-row" name="sesion" method="post" action="http://localhost:80/pokedex/index.php">
+                <form class="d-flex flex-row" name="sesion" method="post" action="./index.php">
                     <div class="p-2 mt-4">
                         <input type="text" name="user" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     </div>

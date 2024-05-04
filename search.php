@@ -10,7 +10,7 @@
             </div>
         </form>
         <?php if ($username == "admin"){
-            echo "<a class='btn btn-success m-1 mb-2'>Agregar Pokemon</a>";
+            echo '<a href="edit_or_create_pokemon.php" class="btn btn-success m-1 mb-2">Crear Pokemon</a>';
         } ?>
     </div>
 
@@ -54,13 +54,13 @@
                     echo '<a href="detail.php?id=' . $row['id'] . '" class="btn btn-sm btn-primary m-1 mb-3">Detalles</a>';
 
                     if ($username == "admin") {
-                        echo '<a href="edit.php?id=' . $row['id'] . '" class="btn btn-primary m-1 mb-2">Editar Pokemon</a>';
+                        echo '<a href="edit_or_create_pokemon.php?id=' . $row['id'] . '" class="btn btn-primary m-1 mb-2">Editar Pokemon</a>';
                         echo '<a href="delete.php?id=' . $row['id'] . '" class="btn btn-danger m-1 mb-2">Eliminar Pokemon</a>';
                     }
 
                     if (isset($userLogin) && $userLogin) {
                         echo '<div class="options">';
-                        echo '<a href="edit.php?id=' . $row['id'] . '" class="btn btn-sm btn-success m-1 mb-2">Editar</a>';
+                        echo '<a href="edit_or_create_pokemon.php?id=' . $row['id'] . '" class="btn btn-sm btn-success m-1 mb-2">Editar</a>';
                         echo '<a href="delete.php?id=' . $row['id'] . '" class="btn btn-sm btn-danger m-1 mb-2">Eliminar</a>';
                         echo '</div>';
                     }
@@ -107,7 +107,7 @@
                 echo '<a href="detail.php?id=' . $row['id'] . '" class="btn btn-sm btn-primary m-1 mb-3">Detalles</a>';
 
                 if ($username == "admin") {
-                    echo '<a href="edit.php?id=' . $row['id'] . '" class="btn btn-primary m-1 mb-2">Editar Pokemon</a>';
+                    echo '<a href="edit_or_create_pokemon.php?id=' . $row['id'] . '" class="btn btn-primary m-1 mb-2">Editar Pokemon</a>';
                     echo '<a href="delete.php?id=' . $row['id'] . '" class="btn btn-danger m-1 mb-2">Eliminar Pokemon</a>';
                 }
 
