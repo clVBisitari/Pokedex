@@ -14,7 +14,7 @@ CREATE TABLE Pokemon(
                         id INT AUTO_INCREMENT PRIMARY KEY,
                         number INT NOT NULL UNIQUE,
                         name VARCHAR(30) NOT NULL,
-                        image VARCHAR(50) NOT NULL,
+                        image VARCHAR(255) NOT NULL,
                         description VARCHAR(300) NOT NULL,
                         idType1 INT NOT NULL,
                         idType2 INT,
